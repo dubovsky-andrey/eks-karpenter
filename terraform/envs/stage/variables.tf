@@ -6,3 +6,13 @@ variable "region" {
     error_message = "Region must be a valid AWS region format (e.g., us-east-1, eu-west-1)."
   }
 }
+
+variable "aws_account_id" {
+  description = "AWS Account ID"
+  type        = string
+  validation {
+    condition     = can(regex("^[0-9]{12}$", var.aws_account_id))
+    error_message = "AWS Account ID must be a 12-digit number."
+  }
+  
+}
