@@ -16,3 +16,12 @@ variable "aws_account_id" {
   }
   
 }
+
+variable "project_name" {
+  description = "Project name for resource naming"
+  type        = string
+  validation {
+    condition     = length(var.project_name) > 0 && length(var.project_name) <= 20
+    error_message = "Project name must be between 1 and 20 characters."
+  }
+}
