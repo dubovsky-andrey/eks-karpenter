@@ -59,7 +59,6 @@ module "eks" {
 
   eks_managed_node_groups = {
     karpenter = {
-      # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.medium"]
 
@@ -99,10 +98,6 @@ module "karpenter" {
   source       = "terraform-aws-modules/eks/aws//modules/karpenter"
   depends_on   = [module.eks]
   cluster_name = var.cluster_name
-
-  #  enable_v1_permissions = true
-
-  #  enable_pod_identity             = true
   create_pod_identity_association = true
 
   # Attach additional IAM policies to the Karpenter node IAM role
